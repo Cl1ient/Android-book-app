@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +47,10 @@ public class AddBookFragment extends Fragment {
             String desc = descEdit.getText() != null ? descEdit.getText().toString() : "";
             String tagsString = tagsEdit.getText() != null ? tagsEdit.getText().toString() : "";
 
+            if(title.isEmpty() || desc.isEmpty() || tagsString.isEmpty()){
+                Toast.makeText(requireContext(), "Veuillez remplir tout les champs", Toast.LENGTH_SHORT).show();
+                return;
+            }
             List<String> tags = Arrays.asList(tagsString.split("\\s*,\\s*"));
 
             Book newBook = new Book(UUID.randomUUID().toString(), title, desc, tags);
