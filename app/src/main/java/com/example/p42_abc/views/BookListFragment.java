@@ -38,7 +38,7 @@ public class BookListFragment extends Fragment {
         recyclerView.setAdapter(bookAdapter);
 
         // init le ViewModel
-        bookViewModel = new ViewModelProvider(this).get(BookViewModel.class);
+        bookViewModel = new ViewModelProvider(requireActivity()).get(BookViewModel.class);
 
         // on observe les nouveaus books
         bookViewModel.getBooks().observe(getViewLifecycleOwner(), books -> {
@@ -48,7 +48,7 @@ public class BookListFragment extends Fragment {
             }
         });
         view.findViewById(R.id.fab_add_book).setOnClickListener(v -> {
-            // TODO : afficher fragment_add_book
+            getParentFragmentManager().beginTransaction().replace(R.id.main, new AddBookFragment()).addToBackStack(null).commit();
         });
     }
 }
