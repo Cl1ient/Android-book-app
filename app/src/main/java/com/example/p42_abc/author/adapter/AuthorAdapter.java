@@ -1,15 +1,14 @@
-package com.example.p42_abc.adapter;
+package com.example.p42_abc.author.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.p42_abc.R;
-import com.example.p42_abc.model.Author;
+import com.example.p42_abc.author.model.Author;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,16 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorViewHolder> {
     public void setAuthors(List<Author> authors) {
         this.authorsList = authors;
         notifyDataSetChanged();
+    }
+
+    public interface OnAuthorClickListener {
+        void onAuthorClick(Author author);
+    }
+
+    private OnAuthorClickListener listener;
+
+    public void setOnAuthorClickListener(OnAuthorClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -37,6 +46,12 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorViewHolder> {
 
         // On remplit le TextView qui se trouve dans l'autre fichier
         holder.textViewName.setText(currentAuthor.getName());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onAuthorClick(currentAuthor);
+            }
+        });
     }
 
     @Override

@@ -1,11 +1,11 @@
-package com.example.p42_abc.model;
+package com.example.p42_abc.author.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Author {
     private int id;
-    private String name; // Tu pourras séparer prénom/nom plus tard si l'API l'exige
+    private String name;
 
     public Author(int id, String name) {
         this.id = id;

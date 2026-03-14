@@ -1,4 +1,4 @@
-package com.example.p42_abc.adapter;
+package com.example.p42_abc.author.adapter;
 
 import android.view.View;
 import android.widget.TextView;
