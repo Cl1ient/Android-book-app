@@ -13,9 +13,15 @@ import com.example.p42_abc.models.Book;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
+public class BookAdapter extends RecyclerView.Adapter<BookViewHolder>{
 
     private List<Book> _bookList = new ArrayList<>();
+
+    private OnBookClickListener _listener;
+
+    public BookAdapter(OnBookClickListener listener){
+        this._listener = listener;
+    }
 
     @NonNull
     @Override
@@ -28,6 +34,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book book = _bookList.get(position);
         holder.bind(book);
+
+        // au click sur l'itemView
+        holder.itemView.setOnClickListener(v -> {
+            if(this._listener != null){
+                _listener.onBookClick(book);
+            }
+        });
     }
 
     @Override
@@ -39,5 +52,4 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
         this._bookList = books;
         notifyDataSetChanged();
     }
-
 }

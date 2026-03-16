@@ -35,7 +35,7 @@ public class AddBookFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // on récup le meme viewModel que la list de livre donc pas de this
-        bookViewModel = new ViewModelProvider(requireActivity()).get(BookViewModel.class);
+        this.bookViewModel = new ViewModelProvider(requireActivity()).get(BookViewModel.class);
 
         TextInputEditText titleEdit = view.findViewById(R.id.edit_text_title);
         TextInputEditText descEdit = view.findViewById(R.id.edit_text_description);

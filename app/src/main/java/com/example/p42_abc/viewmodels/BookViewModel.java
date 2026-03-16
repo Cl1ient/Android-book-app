@@ -12,6 +12,7 @@ public class BookViewModel extends ViewModel {
 
     // ! list de book
     private final MutableLiveData<List<Book>> booksData = new MutableLiveData<>();
+    private final MutableLiveData<Book> selectedBookData = new MutableLiveData<>();
 
     public BookViewModel(){
         loadBooks();
@@ -33,5 +34,21 @@ public class BookViewModel extends ViewModel {
            // refresh la list de liveData
            booksData.setValue(list);
        }
+    }
+
+    public void deleteBook(Book bookToRemove) {
+        List<Book> currentList = booksData.getValue();
+        if (currentList != null) {
+            currentList.remove(bookToRemove);
+            booksData.setValue(currentList);
+        }
+    }
+
+    public void selectBook(Book book) {
+        selectedBookData.setValue(book);
+    }
+
+    public LiveData<Book> getSelectedBook() {
+        return selectedBookData;
     }
 }
