@@ -8,7 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.p42_abc.author.AuthorListFragment;
+import com.example.p42_abc.author.view.AuthorListFragment;
 
 public class MainActivity extends AppCompatActivity {
 

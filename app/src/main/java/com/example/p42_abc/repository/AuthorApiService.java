@@ -2,6 +2,7 @@ package com.example.p42_abc.repository;
 
 
 import com.example.p42_abc.author.model.Author;
+import com.example.p42_abc.author.model.Book;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface AuthorApiService {
     @POST("authors")
     Call<Author> createAuthor(@Body Author author);
 
+    @GET("authors/{author_id}/books")
+    Call<List<Book>> getBooksOfAuthor(@Path("author_id") int authorId);
 }

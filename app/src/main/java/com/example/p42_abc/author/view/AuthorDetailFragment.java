@@ -1,4 +1,4 @@
-package com.example.p42_abc.author;
+package com.example.p42_abc.author.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.p42_abc.R;
 import com.example.p42_abc.author.model.Author;
+import com.example.p42_abc.author.model.Book;
 import com.example.p42_abc.author.viewModel.AuthorSharedViewModel;
 
 public class AuthorDetailFragment extends Fragment {
@@ -61,6 +62,23 @@ public class AuthorDetailFragment extends Fragment {
             }
         });
 
+
+        TextView textBooksList = view.findViewById(R.id.textViewBooksList);
+
+        model.getAuthorBooks().observe(getViewLifecycleOwner(), books -> {
+            if (books != null && !books.isEmpty()) {
+                // S'il a des livres, on crée un texte avec tous les titres
+                StringBuilder liste = new StringBuilder("Livres de l'auteur :\n\n");
+                for (Book livre : books) {
+                    liste.append("- ").append(livre.getTitle())
+                            .append(" (").append(livre.getPublicationYear()).append(")\n");
+                }
+                textBooksList.setText(liste.toString());
+            } else {
+                // S'il n'en a pas
+                textBooksList.setText("Cet auteur n'a aucun livre enregistré.");
+            }
+        });
 
 
 

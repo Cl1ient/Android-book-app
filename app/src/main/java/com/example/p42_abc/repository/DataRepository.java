@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.p42_abc.author.model.Author;
+import com.example.p42_abc.author.model.Book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -18,10 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DataRepository {
     private static DataRepository instance;
     private final AuthorApiService apiService;
-
-    // Le LiveData est maintenant géré ici !
     private final MutableLiveData<List<Author>> allAuthorsLiveData = new MutableLiveData<>();
-
     private DataRepository() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:3000/")
@@ -30,20 +29,15 @@ public class DataRepository {
 
         apiService = retrofit.create(AuthorApiService.class);
     }
-
     public static synchronized DataRepository getInstance() {
         if (instance == null) {
             instance = new DataRepository();
         }
         return instance;
     }
-
-    // --- Renvoie le LiveData pour que le ViewModel puisse l'observer ---
     public LiveData<List<Author>> getAllAuthorsLiveData() {
         return allAuthorsLiveData;
     }
-
-    // --- Les requêtes API avec leurs Callbacks intégrés ---
 
     public void fetchAllAuthors() {
         apiService.getAllAuthors().enqueue(new Callback<List<Author>>() {
@@ -96,4 +90,29 @@ public class DataRepository {
     }
 
 
+    private final MutableLiveData<List<Book>> authorBooksLiveData = new MutableLiveData<>();
+
+    //Pour que le ViewModel puisse lire le tuyau
+    public LiveData<List<Book>> getAuthorBooksLiveData() {
+        return authorBooksLiveData;
+    }
+
+    //La méthode qui demande les livres au serveur
+    public void fetchBooksForAuthor(int authorId) {
+        apiService.getBooksOfAuthor(authorId).enqueue(new Callback<List<Book>>() {
+            @Override
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // Si le serveur répond, on met la liste de livres dans le tuyau
+                    authorBooksLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+                // En cas d'erreur, on met une liste vide pour ne pas faire planter l'appli
+                authorBooksLiveData.setValue(new ArrayList<>());
+            }
+        });
+    }
 }

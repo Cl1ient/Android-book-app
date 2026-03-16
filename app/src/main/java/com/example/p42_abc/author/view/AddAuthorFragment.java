@@ -1,4 +1,4 @@
-package com.example.p42_abc.author;
+package com.example.p42_abc.author.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
