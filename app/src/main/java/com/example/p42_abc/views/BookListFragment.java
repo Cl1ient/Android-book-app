@@ -34,7 +34,13 @@ public class BookListFragment extends Fragment {
         // init RecyclerView et Adapter
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_books);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        bookAdapter = new BookAdapter();
+
+        bookAdapter = new BookAdapter(clickedBook ->{
+            bookViewModel.selectBook(clickedBook);
+            getParentFragmentManager().beginTransaction().replace(R.id.main, new BookDetailFragment())
+                    .addToBackStack(null) // bouton de retour du téléphone
+                    .commit();
+        });
         recyclerView.setAdapter(bookAdapter);
 
         // init le ViewModel
