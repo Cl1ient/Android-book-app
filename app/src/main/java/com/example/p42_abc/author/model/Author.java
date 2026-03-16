@@ -4,29 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Author {
-    private int id;
-    private String name;
+    private Integer id;
+    // Ces noms DOIVENT être identiques à ceux du seed (Prisma)
+    private String firstname;
+    private String lastname;
 
-    public Author(int id, String name) {
+    // Constructeur vide (Obligatoire pour Retrofit/Gson)
+    public Author() {}
+
+    public Author(int id, String firstname, String lastname) {
         this.id = id;
-        this.name = name;
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
 
-    // Getters
     public int getId() { return id; }
-    public String getName() { return name; }
+    public String getFirstname() { return firstname; }
+    public String getLastname() { return lastname; }
 
-    // Setters
-    public void setId(int id) { this.id = id; }
-    public void setName(String name) { this.name = name; }
-
-    // Méthode temporaire pour générer de faux auteurs pour tester l'interface
-    public static List<Author> getFakeAuthors() {
-        List<Author> list = new ArrayList<>();
-        list.add(new Author(1, "Victor Hugo"));
-        list.add(new Author(2, "J.K. Rowling"));
-        list.add(new Author(3, "George Orwell"));
-        list.add(new Author(4, "Agatha Christie"));
-        return list;
+    public String getName() {
+        return (firstname != null ? firstname : "") + " " + (lastname != null ? lastname : "");
     }
+
+    public void setId(int id) { this.id = id; }
+    public void setFirstname(String firstname) { this.firstname = firstname; }
+    public void setLastname(String lastname) { this.lastname = lastname; }
+
 }

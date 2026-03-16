@@ -5,57 +5,35 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.p42_abc.author.model.Author;
+import com.example.p42_abc.repository.DataRepository;
 
 import java.util.List;
 
 public class AuthorSharedViewModel extends ViewModel {
 
-    private MutableLiveData<List<Author>> authorsLiveData;
+    private final DataRepository repository = DataRepository.getInstance();
+    private final MutableLiveData<Author> selected = new MutableLiveData<>();
 
     public LiveData<List<Author>> getAuthors() {
-        if (authorsLiveData == null) {
-            authorsLiveData = new MutableLiveData<>();
-            authorsLiveData.setValue(Author.getFakeAuthors());
-        }
-        return authorsLiveData;
+        // On dit au repo de lancer la requête
+        repository.fetchAllAuthors();
+        // On renvoie directement le LiveData du repo
+        return repository.getAllAuthorsLiveData();
     }
 
-    private final MutableLiveData<Author> selected = new MutableLiveData<Author>();
-
-    public LiveData<Author> getSelected() {
-        return selected;
-    }
-
-    public void select(Author author) {
-        selected.setValue(author);
-    }
-
-    public void addAuthor(String name) {
-        // 1. On récupère la liste actuelle du LiveData
-        List<Author> currentAuthors = authorsLiveData.getValue();
-
-        if (currentAuthors != null) {
-            // 2. On crée le nouvel auteur (on lui donne un ID simple basé sur la taille de la liste)
-            Author newAuthor = new Author(currentAuthors.size() + 1, name);
-
-            // 3. On l'ajoute à la liste
-            currentAuthors.add(newAuthor);
-
-            // 4. On "pousse" la mise à jour pour que les Fragments soient prévenus
-            authorsLiveData.setValue(currentAuthors);
-        }
-    }
+    public LiveData<Author> getSelected() { return selected; }
+    public void select(Author author) { selected.setValue(author); }
 
     public void deleteAuthor(int id) {
-        // 1. On récupère la liste qui est actuellement dans le LiveData
-        List<Author> currentAuthors = authorsLiveData.getValue();
+        // Le ViewModel donne l'ordre, le repo gère le reste
+        repository.deleteAuthor(id);
+    }
 
-        if (currentAuthors != null) {
-            // 2. On cherche l'auteur qui a cet ID et on le vire de la liste
-            currentAuthors.removeIf(author -> author.getId() == id);
-
-
-            authorsLiveData.setValue(currentAuthors);
-        }
+    // On demande maintenant le prénom ET le nom
+    public void addAuthor(String firstName, String lastName) {
+        Author newAuthor = new Author();
+        newAuthor.setFirstname(firstName);
+        newAuthor.setLastname(lastName);
+        repository.createAuthor(newAuthor);
     }
 }

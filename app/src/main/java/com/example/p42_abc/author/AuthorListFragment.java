@@ -38,16 +38,16 @@ public class AuthorListFragment extends Fragment {
         recyclerView.setAdapter(authorAdapter);
 
         // On utilise requireActivity() pour partager les données avec les autres écrans
-        AuthorSharedViewModel model = new ViewModelProvider(requireActivity()).get(AuthorSharedViewModel.class);
+        AuthorSharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(AuthorSharedViewModel.class);
 
         // On observe la liste des auteurs pour remplir l'écran
-        model.getAuthors().observe(getViewLifecycleOwner(), authors -> {
+        viewModel.getAuthors().observe(getViewLifecycleOwner(), authors -> {
             authorAdapter.setAuthors(authors);
         });
 
         authorAdapter.setOnAuthorClickListener(author -> {
             // On dit au ViewModel "Tiens, l'utilisateur a cliqué sur cet auteur"
-            model.select(author);
+            viewModel.select(author);
 
             // On change de page pour aller vers les détails
             requireActivity().getSupportFragmentManager().beginTransaction()

@@ -44,15 +44,16 @@ public class AuthorDetailFragment extends Fragment {
         });
 
         btnDelete.setOnClickListener(v -> {
-            // 1. On récupère l'auteur actuellement sélectionné dans le ViewModel
+            //On récupère l'auteur actuellement sélectionné dans le ViewModel
             Author currentAuthor = model.getSelected().getValue();
 
             if (currentAuthor != null) {
-                // 2. On demande au ViewModel de supprimer l'auteur (et ses livres)
+                //On demande au ViewModel de supprimer l'auteur (et ses livres)
                 model.deleteAuthor(currentAuthor.getId());
 
-                // 3. On ferme le fragment de détail pour revenir à la liste
+                //On ferme le fragment de détail pour revenir à la liste
                 // C'est l'équivalent du bouton "Retour"
+
                 getParentFragmentManager().popBackStack();
 
                 // Petit message pour confirmer à l'utilisateur
