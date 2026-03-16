@@ -1,4 +1,4 @@
-package com.example.p42_abc.views;
+package com.example.p42_abc.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.p42_abc.R;
 import com.example.p42_abc.models.Book;
-import com.example.p42_abc.viewmodels.BookViewModel;
+import com.example.p42_abc.viewModels.BookViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Arrays;

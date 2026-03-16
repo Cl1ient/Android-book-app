@@ -1,4 +1,4 @@
-package com.example.p42_abc.viewmodels;
+package com.example.p42_abc.viewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

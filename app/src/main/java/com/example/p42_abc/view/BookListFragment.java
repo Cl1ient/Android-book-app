@@ -1,4 +1,4 @@
-package com.example.p42_abc.views;
+package com.example.p42_abc.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.p42_abc.R;
 import com.example.p42_abc.adapters.BookAdapter;
-import com.example.p42_abc.viewmodels.BookViewModel;
+import com.example.p42_abc.viewModels.BookViewModel;
 
 public class BookListFragment extends Fragment {
     private BookViewModel bookViewModel;

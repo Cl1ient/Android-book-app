@@ -1,4 +1,4 @@
-package com.example.p42_abc.views;
+package com.example.p42_abc.view;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.p42_abc.R;
-import com.example.p42_abc.viewmodels.BookViewModel;
+import com.example.p42_abc.viewModels.BookViewModel;
 
 public class BookDetailFragment extends Fragment {
     private BookViewModel bookViewModel;
