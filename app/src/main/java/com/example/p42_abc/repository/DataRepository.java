@@ -146,11 +146,11 @@ public class DataRepository {
     }
 
     public void createBook(int authorId, Book book) {
-        apiService.createBook(authorId, book).enqueue(new retrofit2.Callback<Book>() {
+        apiService.createBook(authorId, book).enqueue(new Callback<Book>() {
             @Override
             public void onResponse(retrofit2.Call<Book> call, retrofit2.Response<Book> response) {
                 if (response.isSuccessful()) {
-                    fetchAllBooks(); // On rafraîchit la liste si ça a marché !
+                    fetchAllBooks(); // On rafraîchit la liste si ça a marche
                 } else {
                     android.util.Log.e("API_BUG", "Erreur ajout livre : " + response.code());
                 }

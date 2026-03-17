@@ -38,7 +38,6 @@ public class BookViewModel extends ViewModel {
         return selectedBookData;
     }
 
-
     public void addBook(int authorId, Book book) {
         repository.createBook(authorId, book);
     }

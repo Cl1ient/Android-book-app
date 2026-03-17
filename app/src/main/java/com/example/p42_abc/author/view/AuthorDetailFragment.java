@@ -81,13 +81,6 @@ public class AuthorDetailFragment extends Fragment {
         });
 
 
-        view.findViewById(R.id.button_add_book_to_author).setOnClickListener(v -> {
-            getParentFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new AddBookFragment())
-                    .addToBackStack(null)
-                    .commit();
-        });
-
         Button btnBack = view.findViewById(R.id.buttonBack);
         btnBack.setOnClickListener(v -> {
             // Cette commande simule lappui sur la touche "Retour" du telephone c juste le depilementd e la île
