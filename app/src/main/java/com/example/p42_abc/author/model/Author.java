@@ -5,11 +5,10 @@ import java.util.List;
 
 public class Author {
     private Integer id;
-    // Ces noms DOIVENT être identiques à ceux du seed (Prisma)
     private String firstname;
     private String lastname;
 
-    // Constructeur vide (Obligatoire pour Retrofit/Gson)
+    // Constructeur vide (Obligatoire pour Retrofit)
     public Author() {}
 
     public Author(int id, String firstname, String lastname) {

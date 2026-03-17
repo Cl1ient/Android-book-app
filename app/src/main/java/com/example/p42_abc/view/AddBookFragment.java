@@ -58,6 +58,7 @@ public class AddBookFragment extends Fragment {
                 Toast.makeText(requireContext(), "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
                 return;
             }
+
             Author currentAuthor = authorSharedViewModel.getSelected().getValue();
 
             if (currentAuthor == null || currentAuthor.getId() <= 0) {
