@@ -41,12 +41,9 @@ public class AddAuthorFragment extends Fragment {
             String lastName = editLastName.getText().toString().trim();
 
             if (!lastName.isEmpty()) {
-
                 viewModel.addAuthor(firstName, lastName);
-
                 // On revient à la liste en utilisant NavController
                 Navigation.findNavController(view).popBackStack();
-
             } else {
                 // Si le nom est vide, on affiche une petite erreur rouge sur le champ pour l'aider
                 editLastName.setError("Le nom est obligatoire");

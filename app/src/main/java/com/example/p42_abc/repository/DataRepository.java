@@ -29,12 +29,14 @@ public class DataRepository {
 
         apiService = retrofit.create(ApiService.class);
     }
+
     public static synchronized DataRepository getInstance() {
         if (instance == null) {
             instance = new DataRepository();
         }
         return instance;
     }
+
     public LiveData<List<Author>> getAllAuthorsLiveData() {
         return allAuthorsLiveData;
     }
@@ -44,14 +46,14 @@ public class DataRepository {
             @Override
             public void onResponse(Call<List<Author>> call, Response<List<Author>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // On met à jour le LiveData ici
+                    // On met a jour le LiveData ici
                     allAuthorsLiveData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Author>> call, Throwable t) {
-                // Gestion d'erreur locale
+                // Gestion d erreur locale
             }
         });
     }
@@ -61,13 +63,15 @@ public class DataRepository {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    // On rafraîchit la liste
+                    // On rafraichit la liste
                     fetchAllAuthors();
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {}
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Gestion d erreur locale
+            }
         });
     }
 
@@ -81,7 +85,6 @@ public class DataRepository {
                     Log.e("API_BUG", "Le serveur a refusé ! Code d'erreur : " + response.code());
                 }
             }
-
             @Override
             public void onFailure(Call<Author> call, Throwable t) {}
         });
