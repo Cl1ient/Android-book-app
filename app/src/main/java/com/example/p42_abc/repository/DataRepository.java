@@ -23,7 +23,7 @@ public class DataRepository {
     private final MutableLiveData<List<Author>> allAuthorsLiveData = new MutableLiveData<>();
     private DataRepository() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.79:3000/")
+                .baseUrl("http://10.0.2.2:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

@@ -61,8 +61,5 @@ public class BookDetailFragment extends Fragment {
                 });
             }
         });
-        view.findViewById(R.id.button_back).setOnClickListener(v -> {
-            Navigation.findNavController(view).popBackStack();
-        });
     }
 }
