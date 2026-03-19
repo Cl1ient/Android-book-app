@@ -33,7 +33,6 @@ public class BookDetailFragment extends Fragment {
         TextView titleText = view.findViewById(R.id.text_view_detail_title);
         TextView tagsText = view.findViewById(R.id.text_view_detail_tags);
 
-        // 1. On ajoute les liens vers les nouveaux TextViews du Layout
         TextView dateText = view.findViewById(R.id.text_view_detail_date);
         TextView authorText = view.findViewById(R.id.text_view_detail_author);
 
@@ -46,20 +45,17 @@ public class BookDetailFragment extends Fragment {
                 // Titre
                 titleText.setText(book.getTitle());
 
-                // 2. Ajout de la date de publication
+                //Ajout de la date de publication
                 if (book.getPublicationYear() != null) {
                     dateText.setText("Publié en : " + book.getPublicationYear());
                 } else {
                     dateText.setText("Date inconnue");
                 }
 
-                // 3. Ajout de l'auteur (vérifie le nom de tes méthodes dans Book.java)
+                //Ajout de l'auteur (vérifie le nom de tes méthodes dans Book.java)
                 if (book.getAuthor() != null) {
-                    // Si tu as un objet Author imbriqué :
                     authorText.setText("Auteur : " + book.getAuthor().getFirstname() + " " + book.getAuthor().getLastname());
 
-                    // Si ton modèle a directement une méthode getName() :
-                    // authorText.setText("Auteur : " + book.getAuthor().getName());
                 } else {
                     authorText.setText("Auteur inconnu");
                 }
