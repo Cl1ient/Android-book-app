@@ -182,11 +182,15 @@ public class DataRepository {
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     targetLiveData.setValue(response.body());
+                    Log.d("API_SUCCESS", "Nombre de commentaires reçus : " + response.body().size());
+                }else {
+                    Log.e("API_BUG", "Erreur : " + response.code());
                 }
             }
             @Override
             public void onFailure(Call<List<Comment>> call, Throwable t) {
                 //On gere les erreurs apres si on a le temps
+                Log.e("API_BUG", "Erreur : " + t.getMessage());
             }
         });
     }

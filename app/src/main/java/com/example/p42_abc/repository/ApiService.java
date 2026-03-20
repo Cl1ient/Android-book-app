@@ -46,6 +46,6 @@ public interface ApiService {
     @GET("tags")
     Call<List<Tag>> getAllTags();
 
-    @GET("books/{book_id}/tags")
-    Call<List<Comment>> getCommentOfBook(@Path("id") int bookId);
+    @GET("books/{bookId}/comments")
+    Call<List<Comment>> getCommentOfBook(@Path("bookId") int bookId);
 }
