@@ -35,7 +35,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder>{
         Book book = _bookList.get(position);
         holder.bind(book);
 
-        // au click sur l'itemView
+        // au click sur l itemView
         holder.itemView.setOnClickListener(v -> {
             if(this._listener != null){
                 _listener.onBookClick(book);

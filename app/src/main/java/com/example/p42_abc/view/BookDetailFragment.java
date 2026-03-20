@@ -13,8 +13,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.p42_abc.R;
+import com.example.p42_abc.adapters.CommentAdapter;
 import com.example.p42_abc.viewModels.BookViewModel;
 
 public class BookDetailFragment extends Fragment {
@@ -37,6 +40,11 @@ public class BookDetailFragment extends Fragment {
         TextView authorText = view.findViewById(R.id.text_view_detail_author);
 
         Button deleteButton = view.findViewById(R.id.button_delete_book);
+
+        RecyclerView recyclerComments = view.findViewById(R.id.recycler_view_comments);
+        recyclerComments.setLayoutManager(new LinearLayoutManager(requireContext()));
+        CommentAdapter commentAdapter = new CommentAdapter();
+        recyclerComments.setAdapter(commentAdapter);
 
         bookViewModel = new ViewModelProvider(requireActivity()).get(BookViewModel.class);
 
@@ -74,11 +82,19 @@ public class BookDetailFragment extends Fragment {
                     tagsText.setText("Aucun tag");
                 }
 
+                bookViewModel.loadCommentsForBook(book.getId());
+
                 // Bouton de suppression
                 deleteButton.setOnClickListener(v -> {
                     bookViewModel.deleteBook(book);
                     Navigation.findNavController(view).popBackStack();
                 });
+            }
+        });
+
+        bookViewModel.getBookComments().observe(getViewLifecycleOwner(), comments -> {
+            if (comments != null) {
+                commentAdapter.setComments(comments);
             }
         });
     }

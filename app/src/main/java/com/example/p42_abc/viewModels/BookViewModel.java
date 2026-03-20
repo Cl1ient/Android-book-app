@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.p42_abc.models.Book;
+import com.example.p42_abc.models.Comment;
 import com.example.p42_abc.models.Tag;
 import com.example.p42_abc.repository.DataRepository;
 import java.util.List;
@@ -14,6 +15,8 @@ public class BookViewModel extends ViewModel {
 
     private final MutableLiveData<List<Book>> allBooks = new MutableLiveData<>();
     private final MutableLiveData<Book> selectedBookData = new MutableLiveData<>();
+
+    private final MutableLiveData<List<Comment>> allComments =  new MutableLiveData<>();
 
     public BookViewModel() {
         repository.fetchAllBooks(allBooks);
@@ -52,5 +55,13 @@ public class BookViewModel extends ViewModel {
 
     public void loadTags() {
         repository.fetchAllTags(allTags);
+    }
+
+    public LiveData<List<Comment>> getBookComments() {
+        return allComments;
+    }
+
+    public void loadCommentsForBook(int bookId) {
+        repository.fetchCommentsOfBook(allComments, bookId);
     }
 }
