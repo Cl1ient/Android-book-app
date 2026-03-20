@@ -3,6 +3,7 @@ package com.example.p42_abc.repository;
 
 import com.example.p42_abc.author.model.Author;
 import com.example.p42_abc.models.Book;
+import com.example.p42_abc.models.Comment;
 import com.example.p42_abc.models.Tag;
 
 import java.util.HashMap;
@@ -44,4 +45,7 @@ public interface ApiService {
 
     @GET("tags")
     Call<List<Tag>> getAllTags();
+
+    @GET("books/{book_id}/tags")
+    Call<List<Comment>> getCommentOfBook(@Path("id") int bookId);
 }

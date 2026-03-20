@@ -4,6 +4,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import com.example.p42_abc.author.model.Author;
 import com.example.p42_abc.models.Book;
+import com.example.p42_abc.models.Comment;
 import com.example.p42_abc.models.Tag;
 
 import java.util.ArrayList;
@@ -172,6 +173,21 @@ public class DataRepository {
 
             @Override
             public void onFailure(Call<List<Tag>> call, Throwable t) {}
+        });
+    }
+
+    public void fetchCommentsOfBook(MutableLiveData<List<Comment>> targetLiveData, int bookId) {
+        apiService.getCommentOfBook(bookId).enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    targetLiveData.setValue(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+                //On gere les erreurs apres si on a le temps
+            }
         });
     }
 
