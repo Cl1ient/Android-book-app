@@ -18,6 +18,8 @@ public class BookViewModel extends ViewModel {
 
     private final MutableLiveData<List<Comment>> allComments =  new MutableLiveData<>();
 
+    private final MutableLiveData<List<Tag>> allTags = new MutableLiveData<>();
+
     public BookViewModel() {
         repository.fetchAllBooks(allBooks);
     }
@@ -44,10 +46,12 @@ public class BookViewModel extends ViewModel {
         return selectedBookData;
     }
 
-    public void addBook(int authorId, Book book) {
-        repository.createBook(authorId, book, allBooks);
+    public void addBook(int authorId, Book book, List<Tag> tags) {
+        repository.createBook(authorId, book, tags, allBooks);
     }
-    private final MutableLiveData<List<Tag>> allTags = new MutableLiveData<>();
+    public void updateTags(int bookId, List<Tag> tags) {
+        repository.updateBookTags(bookId, tags, allBooks);
+    }
 
     public LiveData<List<Tag>> getTags() {
         return allTags;

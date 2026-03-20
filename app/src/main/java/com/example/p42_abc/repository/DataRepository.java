@@ -8,6 +8,7 @@ import com.example.p42_abc.models.Comment;
 import com.example.p42_abc.models.Tag;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -115,39 +116,18 @@ public class DataRepository {
     }
 
 
-    public void updateBookTags(int bookId, List<Tag> tags, MutableLiveData<List<Book>> targetLiveData) {
-        java.util.HashMap<String, Object> updateBody = new java.util.HashMap<>();
-        List<String> tagsList = new ArrayList<>();
-
-        for (int i = 0; i < tags.size(); i++) {
-            tagsList.add(tags.get(i).getName());
-        }
-
-        updateBody.put("tags", tagsList);
-
-        apiService.updateBook(bookId, updateBody).enqueue(new Callback<Book>() {
-            @Override
-            public void onResponse(Call<Book> call, Response<Book> response) {
-                fetchAllBooks(targetLiveData);
-            }
-
-            @Override
-            public void onFailure(Call<Book> call, Throwable t) {
-                fetchAllBooks(targetLiveData);
-            }
-        });
-    }
-
-
-    public void createBook(int authorId, Book book, MutableLiveData<List<Book>> targetLiveData) {
+    public void createBook(int authorId, Book book, List<Tag> tags, MutableLiveData<List<Book>> targetLiveData) {
+        // On envoie le livre (qui ne contient pas de tags dans son objet pour l'instant)
         apiService.createBook(authorId, book).enqueue(new Callback<Book>() {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // On récupère l'ID généré par la DB
                     int newBookId = response.body().getId();
 
-                    if (book.getTags() != null && !book.getTags().isEmpty()) {
-                        updateBookTags(newBookId, book.getTags(), targetLiveData);
+                    // Si on a des tags dans les paramètres, on lance l'update
+                    if (tags != null && !tags.isEmpty()) {
+                        updateBookTags(newBookId, tags, targetLiveData);
                     } else {
                         fetchAllBooks(targetLiveData);
                     }
@@ -155,11 +135,41 @@ public class DataRepository {
                     Log.e("API_BUG", "Erreur ajout livre : " + response.code());
                 }
             }
+
             @Override
             public void onFailure(Call<Book> call, Throwable t) {
                 Log.e("API_BUG", "Crash réseau : " + t.getMessage());
             }
         });
+    }
+
+    public void updateBookTags(int bookId, List<Tag> tags, MutableLiveData<List<Book>> targetLiveData) {
+        if (tags == null || tags.isEmpty()) {
+            fetchAllBooks(targetLiveData);
+            return;
+        }
+
+        final int[] count = {0};
+
+        for (Tag t : tags) {
+            apiService.addTagToBook(bookId, t.getId()).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    count[0]++;
+                    if (count[0] == tags.size()) {
+                        fetchAllBooks(targetLiveData);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable throwable) {
+                    count[0]++;
+                    if (count[0] == tags.size()) {
+                        fetchAllBooks(targetLiveData);
+                    }
+                }
+            });
+        }
     }
 
     public void fetchAllTags(MutableLiveData<List<Tag>> targetLiveData) {

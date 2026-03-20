@@ -82,13 +82,12 @@ public class AddBookFragment extends Fragment {
             }
         });
 
-        saveButton.setOnClickListener(v ->{
-
+        saveButton.setOnClickListener(v -> {
             String tagsStr = tagsEdit.getText() != null ? tagsEdit.getText().toString().trim() : "";
             String title = titleEdit.getText() != null ? titleEdit.getText().toString().trim() : "";
             String yearStr = yearEdit.getText() != null ? yearEdit.getText().toString().trim() : "";
 
-            if(title.isEmpty() || selectedAuthorId == null){
+            if (title.isEmpty() || selectedAuthorId == null) {
                 Toast.makeText(requireContext(), "Veuillez remplir le titre et sélectionner un auteur", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -106,20 +105,33 @@ public class AddBookFragment extends Fragment {
             Book newBook = new Book();
             newBook.setTitle(title);
             newBook.setPublicationYear(pubYear);
+
+            List<Tag> bookTags = new ArrayList<>();
             if (!tagsStr.isEmpty()) {
-                String[] tagsArray = tagsStr.split(",");
-                List<Tag> bookTags = new ArrayList<>();
-                for (String t : tagsArray) {
-                    String tagName = t.trim();
-                    if (!tagName.isEmpty()) {
-                        Tag tag = new Tag();
-                        tag.setName(tagName);
-                        bookTags.add(tag);
+                String[] selectedNames = tagsStr.split(",");
+                List<Tag> allExistingTags = bookViewModel.getTags().getValue();
+                List<Integer> idsAjoutes = new ArrayList<>();
+
+                if (allExistingTags != null) {
+                    for (String name : selectedNames) {
+                        String cleanName = name.trim();
+                        for (Tag existingTag : allExistingTags) {
+                            if (existingTag.getName().equalsIgnoreCase(cleanName)) {
+                                if (!idsAjoutes.contains(existingTag.getId())) {
+                                    Tag lightTag = new Tag();
+                                    lightTag.setId(existingTag.getId());
+                                    lightTag.setName(existingTag.getName());
+                                    bookTags.add(lightTag);
+                                    idsAjoutes.add(existingTag.getId());
+                                }
+                                break;
+                            }
+                        }
                     }
                 }
-                newBook.setTags(bookTags);
             }
-            bookViewModel.addBook(selectedAuthorId, newBook);
+
+            bookViewModel.addBook(selectedAuthorId, newBook, bookTags);
 
             Navigation.findNavController(view).popBackStack();
         });

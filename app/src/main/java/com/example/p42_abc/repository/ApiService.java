@@ -48,4 +48,7 @@ public interface ApiService {
 
     @GET("books/{bookId}/comments")
     Call<List<Comment>> getCommentOfBook(@Path("bookId") int bookId);
+
+    @POST("books/{book_id}/tags/{tag_id}")
+    Call<Void> addTagToBook(@Path("book_id") int bookId, @Path("tag_id") int tagId);
 }
