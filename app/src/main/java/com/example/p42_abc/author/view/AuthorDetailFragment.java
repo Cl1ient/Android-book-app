@@ -81,6 +81,7 @@ public class AuthorDetailFragment extends Fragment {
 
         //On observe le livedata des livres de l auteur
         model.getAuthorBooks().observe(getViewLifecycleOwner(), books -> {
+
             if (books != null) {
                 //On récupère l'auteur actuellement affiché sur l'écran
                 Author currentAuthor = model.getSelected().getValue();
@@ -103,11 +104,22 @@ public class AuthorDetailFragment extends Fragment {
             if (currentAuthor != null) {
 
                 model.deleteAuthor(currentAuthor.getId());
-                bookViewModel.refreshBooks();
                 Navigation.findNavController(view).popBackStack();
 
                 Toast.makeText(getContext(), "Auteur supprimé", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    //je dois demander au prof
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        AuthorSharedViewModel model = new ViewModelProvider(requireActivity()).get(AuthorSharedViewModel.class);
+
+        if (model.getSelected().getValue() != null) {
+            model.select(model.getSelected().getValue());
+        }
     }
 }

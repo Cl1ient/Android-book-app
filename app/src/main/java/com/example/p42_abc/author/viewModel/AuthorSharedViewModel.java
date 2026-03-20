@@ -36,6 +36,10 @@ public class AuthorSharedViewModel extends ViewModel {
         }
     }
 
+    public void refreshBookOfAuthor(int authorId) {
+        repository.fetchBooksForAuthor(authorId, authorBooks);
+    }
+
     public LiveData<List<Book>> getAuthorBooks() {
         return authorBooks;
     }
