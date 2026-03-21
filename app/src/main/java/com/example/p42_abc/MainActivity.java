@@ -37,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation_view);
         NavigationUI.setupWithNavController(bnv, navController);
+        bnv.setOnItemSelectedListener(item -> {
+
+            navController.popBackStack(navController.getGraph().getStartDestinationId(), false);
+            return NavigationUI.onNavDestinationSelected(item, navController);
+        });
     }
 
     @Override
