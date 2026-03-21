@@ -1,5 +1,6 @@
 package com.example.p42_abc.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder>{
         return _bookList != null ? _bookList.size() : 0;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setBooks(List<Book> books){
         this._bookList = books;
         notifyDataSetChanged();

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +43,7 @@ public class AddAuthorFragment extends Fragment {
 
             if (!lastName.isEmpty()) {
                 viewModel.addAuthor(firstName, lastName);
+                Toast.makeText(requireContext(), "Auteur ajouté", Toast.LENGTH_SHORT).show();
                 // On revient à la liste en utilisant NavController
                 Navigation.findNavController(view).popBackStack();
             } else {

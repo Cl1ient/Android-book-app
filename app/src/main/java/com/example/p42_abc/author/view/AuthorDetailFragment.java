@@ -1,5 +1,6 @@
 package com.example.p42_abc.author.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,12 +28,15 @@ public class AuthorDetailFragment extends Fragment {
 
     //Adapter pour le recycler View
     private BookAdapter bookAdapter;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_author_detail, container, false);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -43,6 +47,12 @@ public class AuthorDetailFragment extends Fragment {
         // On utilise bien requireActivity() pour récupérer le meme ViewModel que la liste
         AuthorSharedViewModel model = new ViewModelProvider(requireActivity()).get(AuthorSharedViewModel.class);
         BookViewModel bookViewModel = new ViewModelProvider(requireActivity()).get(BookViewModel.class);
+
+        // Rafraîchir les livres de l'auteur dès que la vue est créée ou qu'on revient dessus
+        Author authorToRefresh = model.getSelected().getValue();
+        if (authorToRefresh != null) {
+            model.refreshBookOfAuthor(authorToRefresh.getId());
+        }
 
         model.getSelected().observe(getViewLifecycleOwner(), author -> {
             if (author != null) {
@@ -62,7 +72,7 @@ public class AuthorDetailFragment extends Fragment {
             // On cherche ce livre dans la liste complète
             if (bookViewModel.getBooks().getValue() != null) {
                 for (Book bookInList : bookViewModel.getBooks().getValue()) {
-                    if (bookInList.getId() == clickedBook.getId()) {
+                    if (bookInList.getId().equals(clickedBook.getId())) {
                         completeBook = bookInList;
                         break;
                     }
@@ -96,7 +106,6 @@ public class AuthorDetailFragment extends Fragment {
                 }
                 bookAdapter.setBooks(books);
             }
-//            bookAdapter.notifyDataSetChanged();
         });
 
         btnDelete.setOnClickListener(v -> {
@@ -113,15 +122,14 @@ public class AuthorDetailFragment extends Fragment {
         });
     }
 
-    //je dois demander au prof
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        AuthorSharedViewModel model = new ViewModelProvider(requireActivity()).get(AuthorSharedViewModel.class);
-
-        if (model.getSelected().getValue() != null) {
-            model.select(model.getSelected().getValue());
-        }
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        // Forcer le rafraîchissement au retour du fragment DetailBook
+//        AuthorSharedViewModel model = new ViewModelProvider(requireActivity()).get(AuthorSharedViewModel.class);
+//        Author authorToRefresh = model.getSelected().getValue();
+//        if (authorToRefresh != null) {
+//            model.refreshBookOfAuthor(authorToRefresh.getId());
+//        }
+//    }
 }

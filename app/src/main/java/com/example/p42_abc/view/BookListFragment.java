@@ -1,5 +1,6 @@
 package com.example.p42_abc.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class BookListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_book_list, container, false);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -51,14 +53,17 @@ public class BookListFragment extends Fragment {
 
         // init le ViewModel
         bookViewModel = new ViewModelProvider(requireActivity()).get(BookViewModel.class);
+        
+        // On force le rafraîchissement pour voir les changements (ex: suppression d'auteur)
+        bookViewModel.refreshBooks();
 
         // on observe les nouveaus books
         bookViewModel.getBooks().observe(getViewLifecycleOwner(), books -> {
             // on envoie a l'adapter pour l'afficher ensuite dans la view
             if (books != null) {
                 bookAdapter.setBooks(books);
+                bookAdapter.notifyDataSetChanged(); // Rafraîchissement manuel
             }
-            bookAdapter.notifyDataSetChanged();
         });
         view.findViewById(R.id.fab_add_book).setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_bookListFragment_to_addBookFragment);
@@ -92,6 +97,7 @@ public class BookListFragment extends Fragment {
 
                     // On envoie la liste triée à l'adaptateur
                     bookAdapter.setBooks(filteredList);
+                    bookAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -101,11 +107,11 @@ public class BookListFragment extends Fragment {
     }
 
     //il faut demander au prof
-    @Override
-    public void onResume() {
-        super.onResume();
-        bookViewModel.refreshBooks();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        bookViewModel.refreshBooks();
+//    }
 
 
 }
