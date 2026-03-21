@@ -40,6 +40,8 @@ public class BookDetailFragment extends Fragment {
         TextView dateText = view.findViewById(R.id.text_view_detail_date);
         TextView authorText = view.findViewById(R.id.text_view_detail_author);
 
+        TextView ratingText = view.findViewById(R.id.text_view_detail_rating);
+
         Button deleteButton = view.findViewById(R.id.button_delete_book);
 
         RecyclerView recyclerComments = view.findViewById(R.id.recycler_view_comments);
@@ -83,6 +85,7 @@ public class BookDetailFragment extends Fragment {
                     tagsText.setText("Aucun tag");
                 }
 
+                bookViewModel.loadAverage(book.getId());
                 bookViewModel.loadCommentsForBook(book.getId());
 
                 // Bouton de suppression
@@ -99,5 +102,16 @@ public class BookDetailFragment extends Fragment {
                 commentAdapter.setComments(comments);
             }
         });
+
+        // Observer pour la note moyenne
+        bookViewModel.getCurrentAverage().observe(getViewLifecycleOwner(), average -> {
+            if (average != null && average > 0) {
+                // Affiche la note avec une décimale
+                ratingText.setText(String.format("Note : %.1f / 5", average));
+            } else {
+                ratingText.setText("Note : Aucune note");
+            }
+        });
+
     }
 }

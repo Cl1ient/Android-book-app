@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.p42_abc.author.model.Author;
 import com.example.p42_abc.models.Book;
 import com.example.p42_abc.models.Comment;
+import com.example.p42_abc.models.Rating;
 import com.example.p42_abc.models.Tag;
 
 import java.util.ArrayList;
@@ -201,6 +202,24 @@ public class DataRepository {
             public void onFailure(Call<List<Comment>> call, Throwable t) {
                 //On gere les erreurs apres si on a le temps
                 Log.e("API_BUG", "Erreur : " + t.getMessage());
+            }
+        });
+    }
+
+    public void fetchAverage(int bookId, MutableLiveData<Double> target) {
+        apiService.getAverageRating(bookId).enqueue(new Callback<Double>() {
+            @Override
+            public void onResponse(Call<Double> call, Response<Double> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    target.postValue(response.body());
+                } else {
+                    target.postValue(0.0);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Double> call, Throwable t) {
+                target.postValue(0.0);
             }
         });
     }

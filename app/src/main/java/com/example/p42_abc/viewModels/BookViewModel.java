@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.p42_abc.models.Book;
 import com.example.p42_abc.models.Comment;
+import com.example.p42_abc.models.Rating;
 import com.example.p42_abc.models.Tag;
 import com.example.p42_abc.repository.DataRepository;
 import java.util.List;
@@ -67,5 +68,15 @@ public class BookViewModel extends ViewModel {
 
     public void loadCommentsForBook(int bookId) {
         repository.fetchCommentsOfBook(allComments, bookId);
+    }
+
+    private final MutableLiveData<Double> currentAverage = new MutableLiveData<>();
+
+    public LiveData<Double> getCurrentAverage() {
+        return currentAverage;
+    }
+
+    public void loadAverage(int bookId) {
+        repository.fetchAverage(bookId, currentAverage);
     }
 }

@@ -4,6 +4,7 @@ package com.example.p42_abc.repository;
 import com.example.p42_abc.author.model.Author;
 import com.example.p42_abc.models.Book;
 import com.example.p42_abc.models.Comment;
+import com.example.p42_abc.models.Rating;
 import com.example.p42_abc.models.Tag;
 
 import java.util.HashMap;
@@ -51,4 +52,7 @@ public interface ApiService {
 
     @POST("books/{book_id}/tags/{tag_id}")
     Call<Void> addTagToBook(@Path("book_id") int bookId, @Path("tag_id") int tagId);
+
+    @GET("books/{book_id}/ratings/average")
+    Call<Double> getAverageRating(@Path("book_id") int bookId);
 }
