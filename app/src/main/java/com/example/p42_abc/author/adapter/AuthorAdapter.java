@@ -3,10 +3,12 @@ package com.example.p42_abc.author.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.p42_abc.R;
 import com.example.p42_abc.author.model.Author;
 
@@ -44,8 +46,19 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorViewHolder> {
     public void onBindViewHolder(@NonNull AuthorViewHolder holder, int position) {
         Author currentAuthor = authorsList.get(position);
 
-        // On remplit le TextView qui se trouve dans l'autre fichier
         holder.textViewName.setText(currentAuthor.getName());
+
+        ImageView imageAvatar = holder.itemView.findViewById(R.id.image_author_avatar);
+
+        String nomFormate = currentAuthor.getName().replace(" ", "+");
+
+        String urlAvatar = "https://ui-avatars.com/api/?name=" + nomFormate + "&background=random&color=fff&rounded=true";
+
+        if (imageAvatar != null) {
+            Glide.with(holder.itemView.getContext())
+                    .load(urlAvatar)
+                    .into(imageAvatar);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
