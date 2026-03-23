@@ -1,7 +1,4 @@
-package com.example.p42_abc.author.model;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.example.p42_abc.models;
 
 public class Author {
     private Integer id;

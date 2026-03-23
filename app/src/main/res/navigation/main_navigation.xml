@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/authorListFragment"
-        android:name="com.example.p42_abc.author.view.AuthorListFragment"
+        android:name="com.example.p42_abc.view.AuthorListFragment"
         android:label="Authors"
         tools:layout="@layout/fragment_author_list">
         <action
@@ -20,13 +20,13 @@
 
     <fragment
         android:id="@+id/authorDetailFragment"
-        android:name="com.example.p42_abc.author.view.AuthorDetailFragment"
+        android:name="com.example.p42_abc.view.AuthorDetailFragment"
         android:label="Author Detail"
         tools:layout="@layout/fragment_author_detail" />
 
     <fragment
         android:id="@+id/addAuthorFragment"
-        android:name="com.example.p42_abc.author.view.AddAuthorFragment"
+        android:name="com.example.p42_abc.view.AddAuthorFragment"
         android:label="Add Author"
         tools:layout="@layout/fragment_add_author" />
 

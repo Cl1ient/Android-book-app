@@ -19,8 +19,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.p42_abc.R;
-import com.example.p42_abc.author.model.Author;
-import com.example.p42_abc.author.viewModel.AuthorSharedViewModel;
+import com.example.p42_abc.models.Author;
+import com.example.p42_abc.viewModels.AuthorSharedViewModel;
 import com.example.p42_abc.models.Book;
 import com.example.p42_abc.models.Tag;
 import com.example.p42_abc.viewModels.BookViewModel;

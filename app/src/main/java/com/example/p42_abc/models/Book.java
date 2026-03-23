@@ -1,9 +1,5 @@
 package com.example.p42_abc.models;
 
-import com.example.p42_abc.author.model.Author;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Book {

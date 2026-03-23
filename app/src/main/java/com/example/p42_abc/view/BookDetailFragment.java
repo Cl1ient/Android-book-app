@@ -3,7 +3,6 @@ package com.example.p42_abc.view;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.p42_abc.R;
 import com.example.p42_abc.adapters.CommentAdapter;
-import com.example.p42_abc.author.viewModel.AuthorSharedViewModel;
-import com.example.p42_abc.models.Book;
+import com.example.p42_abc.viewModels.AuthorSharedViewModel;
 import com.example.p42_abc.viewModels.BookViewModel;
 
 public class BookDetailFragment extends Fragment {

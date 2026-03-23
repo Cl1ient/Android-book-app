@@ -2,14 +2,12 @@ package com.example.p42_abc.repository;
 
 import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
-import com.example.p42_abc.author.model.Author;
+import com.example.p42_abc.models.Author;
 import com.example.p42_abc.models.Book;
 import com.example.p42_abc.models.Comment;
-import com.example.p42_abc.models.Rating;
 import com.example.p42_abc.models.Tag;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;

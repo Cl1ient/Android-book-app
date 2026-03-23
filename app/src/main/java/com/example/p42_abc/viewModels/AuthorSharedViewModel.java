@@ -1,10 +1,10 @@
-package com.example.p42_abc.author.viewModel;
+package com.example.p42_abc.viewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.p42_abc.author.model.Author;
+import com.example.p42_abc.models.Author;
 import com.example.p42_abc.repository.DataRepository;
 import com.example.p42_abc.models.Book;
 import java.util.List;

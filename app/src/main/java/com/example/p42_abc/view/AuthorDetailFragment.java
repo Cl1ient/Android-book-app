@@ -1,4 +1,4 @@
-package com.example.p42_abc.author.view;
+package com.example.p42_abc.view;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.p42_abc.adapters.BookAdapter;
 import com.example.p42_abc.models.Book;
 import com.example.p42_abc.R;
-import com.example.p42_abc.author.model.Author;
-import com.example.p42_abc.author.viewModel.AuthorSharedViewModel;
+import com.example.p42_abc.models.Author;
+import com.example.p42_abc.viewModels.AuthorSharedViewModel;
 import com.example.p42_abc.viewModels.BookViewModel;
 
 public class AuthorDetailFragment extends Fragment {

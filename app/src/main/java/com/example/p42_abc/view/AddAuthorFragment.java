@@ -1,4 +1,4 @@
-package com.example.p42_abc.author.view;
+package com.example.p42_abc.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.p42_abc.R;
-import com.example.p42_abc.author.viewModel.AuthorSharedViewModel;
+import com.example.p42_abc.viewModels.AuthorSharedViewModel;
 
 public class AddAuthorFragment extends Fragment {
 

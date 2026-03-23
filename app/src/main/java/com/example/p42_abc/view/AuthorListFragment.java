@@ -1,4 +1,4 @@
-package com.example.p42_abc.author.view;
+package com.example.p42_abc.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.p42_abc.R;
-import com.example.p42_abc.author.model.Author;
+import com.example.p42_abc.models.Author;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 // Assure-toi que ces imports correspondent bien à tes dossiers (appuie sur Alt+Entrée si c'est rouge)
-import com.example.p42_abc.author.adapter.AuthorAdapter;
-import com.example.p42_abc.author.viewModel.AuthorSharedViewModel;
+import com.example.p42_abc.adapters.AuthorAdapter;
+import com.example.p42_abc.viewModels.AuthorSharedViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

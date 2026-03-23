@@ -1,10 +1,9 @@
 package com.example.p42_abc.repository;
 
 
-import com.example.p42_abc.author.model.Author;
+import com.example.p42_abc.models.Author;
 import com.example.p42_abc.models.Book;
 import com.example.p42_abc.models.Comment;
-import com.example.p42_abc.models.Rating;
 import com.example.p42_abc.models.Tag;
 
 import java.util.HashMap;
