@@ -46,6 +46,8 @@ public class BookDetailFragment extends Fragment {
         TextView dateText = view.findViewById(R.id.text_view_detail_date);
         TextView authorText = view.findViewById(R.id.text_view_detail_author);
 
+        TextView ratingText = view.findViewById(R.id.text_view_detail_rating);
+
 
         Button deleteButton = view.findViewById(R.id.button_delete_book);
         Button editButton = view.findViewById(R.id.button_edit_book);
@@ -109,6 +111,14 @@ public class BookDetailFragment extends Fragment {
                 } else {
                     tagsText.setText("Aucun tag");
                 }
+
+                bookViewModel.getCurrentAverage().observe(getViewLifecycleOwner(), average -> {
+                    if (average != null && average > 0) {
+                        ratingText.setText(String.format("Note : %.1f / 5", average));
+                    } else {
+                        ratingText.setText("Note : Aucune");
+                    }
+                });
 
 
                 bookViewModel.loadAverage(book.getId());
