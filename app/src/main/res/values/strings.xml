@@ -21,5 +21,9 @@
     <string name="modifier_le_livre">Modifier ce livre</string>
     <string name="annee_de_pbl">Année de publication (optionnel)</string>
     <string name="enregistrer_les_modifications">Enregistrer les modifications</string>">
-    <string name="mettrez_a_jour_les_informations_du_livre">Mettez à jour les informations du livre.</string>">
+    <string name="mettrez_a_jour_les_informations_du_livre">Mettez à jour les informations du livre.</string>
+    <string name="il_n_y_a_pas_encore_de_commentaire_pour_ce_livre">Il n\'y a pas encore de commentaire pour ce livre.</string>
+    <string name="books">Books</string>
+    <string name="authors">Authors</string>
+    ">
 </resources>
