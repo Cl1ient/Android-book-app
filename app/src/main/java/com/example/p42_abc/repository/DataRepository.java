@@ -49,6 +49,7 @@ public class DataRepository {
 
             @Override
             public void onFailure(@NonNull Call<List<Author>> call, @NonNull Throwable t) {
+                Log.e("API_BUG", "Échec fetchAllAuthors : " + t.getMessage());
             }
         });
     }
@@ -64,6 +65,7 @@ public class DataRepository {
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.e("API_BUG", "Échec deleteAuthor : " + t.getMessage());
             }
         });
     }
@@ -81,6 +83,7 @@ public class DataRepository {
 
             @Override
             public void onFailure(@NonNull Call<Author> call, @NonNull Throwable t) {
+                Log.e("API_BUG", "Échec createAuthor : " + t.getMessage());
             }
         });
     }
@@ -96,6 +99,7 @@ public class DataRepository {
 
             @Override
             public void onFailure(@NonNull Call<List<Book>> call, @NonNull Throwable t) {
+                Log.e("API_BUG", "Échec fetchBooksForAuthor : " + t.getMessage());
                 targetLiveData.setValue(new ArrayList<>());
             }
         });
@@ -112,6 +116,7 @@ public class DataRepository {
 
             @Override
             public void onFailure(@NonNull Call<List<Book>> call, @NonNull Throwable t) {
+                Log.e("API_BUG", "Échec fetchAllBooks : " + t.getMessage());
             }
         });
     }
@@ -125,10 +130,10 @@ public class DataRepository {
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.e("API_BUG", "Échec deleteBook : " + t.getMessage());
             }
         });
     }
-
 
     public void createBook(int authorId, Book book, List<Tag> tags, MutableLiveData<List<Book>> targetLiveData) {
         // On envoie le livre (qui ne contient pas de tags dans son objet pour l'instant)
@@ -152,7 +157,7 @@ public class DataRepository {
 
             @Override
             public void onFailure(@NonNull Call<Book> call, @NonNull Throwable t) {
-                Log.e("API_BUG", "Crash réseau : " + t.getMessage());
+                Log.e("API_BUG", "Crash réseau createBook : " + t.getMessage());
             }
         });
     }
@@ -177,6 +182,7 @@ public class DataRepository {
 
                 @Override
                 public void onFailure(@NonNull Call<Void> call, @NonNull Throwable throwable) {
+                    Log.e("API_BUG", "Échec updateBookTags pour le tag " + t.getId() + " : " + throwable.getMessage());
                     count[0]++;
                     if (count[0] == tags.size()) {
                         fetchAllBooks(targetLiveData);
@@ -197,6 +203,7 @@ public class DataRepository {
 
             @Override
             public void onFailure(@NonNull Call<List<Tag>> call, @NonNull Throwable t) {
+                Log.e("API_BUG", "Échec fetchAllTags : " + t.getMessage());
             }
         });
     }
@@ -216,7 +223,7 @@ public class DataRepository {
             @Override
             public void onFailure(@NonNull Call<List<Comment>> call, @NonNull Throwable t) {
                 //On gere les erreurs apres si on a le temps
-                Log.e("API_BUG", "Erreur : " + t.getMessage());
+                Log.e("API_BUG", "Échec fetchCommentsOfBook : " + t.getMessage());
             }
         });
     }
@@ -234,6 +241,7 @@ public class DataRepository {
 
             @Override
             public void onFailure(@NonNull Call<Double> call, @NonNull Throwable t) {
+                Log.e("API_BUG", "Échec fetchAverage : " + t.getMessage());
                 target.postValue(0.0);
             }
         });
@@ -262,9 +270,8 @@ public class DataRepository {
 
             @Override
             public void onFailure(@NonNull Call<Book> call, @NonNull Throwable t) {
-                Log.e("API_BUG", "Crash : " + t.getMessage());
+                Log.e("API_BUG", "Crash updateBook : " + t.getMessage());
             }
         });
     }
-
 }
