@@ -1,5 +1,6 @@
 package com.example.p42_abc.features.author.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorViewHolder> {
 
     private List<Author> authorsList = new ArrayList<>();
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setAuthors(List<Author> authors) {
         this.authorsList = authors;
         notifyDataSetChanged();

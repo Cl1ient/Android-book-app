@@ -118,11 +118,11 @@ public class AuthorDetailFragment extends Fragment {
             //On recupère l'auteur actuellement sélectionné dans le ViewModel
             Author currentAuthor = model.getSelected().getValue();
             if (currentAuthor != null) {
-
+                //On supprime l'auteur
                 model.deleteAuthor(currentAuthor.getId());
                 bookViewModel.refreshBooks();
                 Navigation.findNavController(view).popBackStack();
-
+                //On affiche un toast pour informer l'utilisateur
                 Toast.makeText(getContext(), "Auteur supprimé", Toast.LENGTH_SHORT).show();
             }
         });

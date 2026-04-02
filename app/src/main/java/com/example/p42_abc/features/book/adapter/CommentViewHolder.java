@@ -17,7 +17,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
         content = itemView.findViewById(R.id.text_comment_content);
     }
 
-    // Petite méthode propre pour lier les données
+    // methode pour lier les donnees au viewholder
     public void bind(Comment comment) {
         content.setText(comment.getContent());
     }

@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Pour le bouton retour
     @Override
     public boolean onSupportNavigateUp() {
         if (navController != null) {

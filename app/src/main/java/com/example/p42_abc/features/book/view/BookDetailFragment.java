@@ -92,7 +92,7 @@ public class BookDetailFragment extends Fragment {
                     }
                 }
 
-                //On remplie les
+                //On remplie les autres infos
                 if (book.getPublicationYear() != null) {
                     dateText.setText("Publié en : " + book.getPublicationYear());
                 } else {
@@ -138,6 +138,7 @@ public class BookDetailFragment extends Fragment {
                     Navigation.findNavController(view).popBackStack();
                 });
 
+                //btn pour modifier
                 editButton.setOnClickListener(v -> {
                     Navigation.findNavController(view).navigate(R.id.action_bookDetailFragment_to_editBookFragment);
                 });
@@ -150,7 +151,5 @@ public class BookDetailFragment extends Fragment {
                 commentAdapter.setComments(comments);
             }
         });
-
-
     }
 }

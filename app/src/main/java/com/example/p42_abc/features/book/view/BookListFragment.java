@@ -70,8 +70,6 @@ public class BookListFragment extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_bookListFragment_to_addBookFragment);
         });
 
-
-
         // On écoute chaque lettre tapée au clavier
         searchBar.addTextChangedListener(new android.text.TextWatcher() {
             @Override

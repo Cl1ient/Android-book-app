@@ -95,9 +95,11 @@ public class AddBookFragment extends Fragment {
                 for (Author a : authors) {
                     authorNames.add(a.getName());
                 }
+                //Pour la liste des auteurs
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, authorNames);
                 authorAutoComplete.setAdapter(adapter);
 
+                //Lorque on click sur un auter
                 authorAutoComplete.setOnItemClickListener((parent, view1, position, id) -> {
                     selectedAuthorId = authors.get(position).getId();
                 });

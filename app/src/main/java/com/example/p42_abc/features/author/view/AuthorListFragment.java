@@ -44,6 +44,7 @@ public class AuthorListFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewAuthors);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         authorAdapter = new AuthorAdapter();
+        //Configuration de l'adapter
         recyclerView.setAdapter(authorAdapter);
 
         // On utilise requireActivity() pour partager les données avec les autres écrans
